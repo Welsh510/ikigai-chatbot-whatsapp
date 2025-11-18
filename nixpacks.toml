@@ -1,3 +1,10 @@
-# nixpacks.toml
+# nixpacks.toml - Railway build configuration
+
+[phases.setup]
+nixPkgs = ["python310", "gcc", "g++", "gfortran", "openssl"]
+
+[phases.install]
+cmds = ["pip install --upgrade pip setuptools wheel"]
+
 [start]
-cmd = "gunicorn chatbot:app --bind 0.0.0.0:$PORT"
+cmd = "gunicorn chatbot:app --bind 0.0.0.0:$PORT --workers 2 --timeout 120"
